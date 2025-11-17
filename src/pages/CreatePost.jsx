@@ -3,7 +3,7 @@ import { supabase } from '../client'
 
 const CreatePost = () => {
 
-    const [post, setPost] = useState({ title: "", author: "", description: "" })
+    const [post, setPost] = useState({ title: "", content: "", image_url: "" })
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -20,29 +20,64 @@ const CreatePost = () => {
 
         await supabase
             .from('Posts')
-            .insert({ title: post.title, author: post.author, description: post.description })
+            .insert({ title: post.title, content: post.content, image_url: post.image_url })
             .select()
 
         window.location = "/";
     }
 
     return (
-        <div>
-            <form>
-                <label htmlFor="title">Title</label> <br />
-                <input type="text" id="title" name="title" onChange={handleChange} /><br />
-                <br />
+        <div className="form-wrapper">
+            <div className="form-card">
+                <form onSubmit={createPost}>
+                    {/* Title Field */}
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                            value={post.title}
+                            onChange={handleChange}
+                            className="form-input"
+                        />
+                    </div>
 
-                <label htmlFor="author">Author</label><br />
-                <input type="text" id="author" name="author" onChange={handleChange} /><br />
-                <br />
+                    {/* Content Field */}
+                    <div className="form-group">
+                        <textarea
+                            rows="8"
+                            id="content"
+                            name="content"
+                            placeholder="Content (Optional)"
+                            value={post.content}
+                            onChange={handleChange}
+                            className="form-textarea"
+                        />
+                    </div>
 
-                <label htmlFor="description">Description</label><br />
-                <textarea rows="5" cols="50" id="description" name="description" onChange={handleChange}>
-                </textarea>
-                <br />
-                <input type="submit" value="Submit" onClick={createPost} />
-            </form>
+                    {/* Image URL Field */}
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            id="imageUrl"
+                            name="imageUrl"
+                            placeholder="Image URL (Optional)"
+                            value={post.imageUrl}
+                            onChange={handleChange}
+                            className="form-input"
+                        />
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        className="submit-button"
+                    >
+                        Create Post
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }
