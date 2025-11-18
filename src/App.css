@@ -147,3 +147,146 @@
     .submit-button:hover {
         background-color: #0d9488;
     }
+
+.read-post-container {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    padding: 2rem 0;
+}
+
+.post-wrapper {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.post-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.post-timestamp {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.post-title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.post-content {
+    color: #374151;
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.post-image {
+    width: 100%;
+    max-width: 28rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+}
+
+.actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid #e5e7eb;
+}
+
+.upvote-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4b5563;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    transition: color 0.2s;
+}
+
+    .upvote-button:hover {
+        color: #14b8a6;
+    }
+
+.upvote-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.action-buttons {
+    margin-left: auto;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.icon-button {
+    padding: 0.5rem;
+    color: #9ca3af;
+    background: none;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .icon-button:hover {
+        color: #4b5563;
+        background-color: #f3f4f6;
+    }
+
+    .icon-button.delete:hover {
+        color: #dc2626;
+    }
+
+    .icon-button svg {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+.comments-section {
+    margin-top: 1.5rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.comments-list {
+    margin-bottom: 1rem;
+}
+
+.comment-item {
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+    .comment-input:focus {
+        border-color: #14b8a6;
+    }
+
+    .comment-input::placeholder {
+        color: #9ca3af;
+    }
