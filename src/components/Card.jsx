@@ -5,7 +5,7 @@ const Card = (props) => {
         <div className="card">
             <p className="card-date">Posted {props.created_at_relative}</p>
 
-            <Link to={`/post/${props.id}`} className="card-title">
+            <Link to={`/edit/${props.id}`} className="card-title">
                 {props.title}
             </Link>
 

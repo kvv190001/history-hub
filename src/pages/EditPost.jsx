@@ -1,29 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../client'
 
 const EditPost = () => {
 
     const { id } = useParams()
-    const [post, setPost] = useState({ id: null, title: "", author: "", description: "" })
+    const [post, setPost] = useState({ title: "", content: "", image_url: "" })
+
+    useEffect(() => {
+        const fetchPost = async () => {
+            const { data } = await supabase
+                .from('HistoryPosts')
+                .select('*')
+                .eq('id', id)
+                .single()
+
+            // set state of Posts
+            setPost(data)
+        }
+
+        fetchPost();
+    }, [id])
 
     const updatePost = async (event) => {
         event.preventDefault();
 
         await supabase
-            .from('Posts')
-            .update({ title: post.title, author: post.author, description: post.description })
-            .eq('id', id);
-
-        window.location = "/";
-    }
-
-    const deletePost = async (event) => {
-        event.preventDefault();
-
-        await supabase
-            .from('Posts')
-            .delete()
+            .from('HistoryPosts')
+            .update({ title: post.title, content: post.content, image_url: post.image_url })
             .eq('id', id);
 
         window.location = "/";
@@ -40,23 +44,57 @@ const EditPost = () => {
     }
 
     return (
-        <div>
-            <form>
-                <label htmlFor="title">Title</label> <br />
-                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} /><br />
-                <br />
+        <div className="form-wrapper">
+            <div className="form-card">
+                <form onSubmit={updatePost}>
+                    {/* Title Field */}
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                            value={post.title}
+                            onChange={handleChange}
+                            className="form-input"
+                        />
+                    </div>
 
-                <label htmlFor="author">Author</label><br />
-                <input type="text" id="author" name="author" value={post.author} onChange={handleChange} /><br />
-                <br />
+                    {/* Content Field */}
+                    <div className="form-group">
+                        <textarea
+                            rows="8"
+                            id="content"
+                            name="content"
+                            placeholder="Content (Optional)"
+                            value={post.content}
+                            onChange={handleChange}
+                            className="form-textarea"
+                        />
+                    </div>
 
-                <label htmlFor="description">Description</label><br />
-                <textarea rows="5" cols="50" id="description" name="description" value={post.description} onChange={handleChange} >
-                </textarea>
-                <br />
-                <input type="submit" value="Submit" onClick={updatePost} />
-                <button className="deleteButton" onClick={deletePost}>Delete</button>
-            </form>
+                    {/* Image URL Field */}
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            id="imageUrl"
+                            name="imageUrl"
+                            placeholder="Image URL (Optional)"
+                            value={post.imageUrl}
+                            onChange={handleChange}
+                            className="form-input"
+                        />
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        className="submit-button"
+                    >
+                        Update Post
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }

@@ -19,7 +19,7 @@ const CreatePost = () => {
         event.preventDefault();
 
         await supabase
-            .from('Posts')
+            .from('HistoryPosts')
             .insert({ title: post.title, content: post.content, image_url: post.image_url })
             .select()
 
